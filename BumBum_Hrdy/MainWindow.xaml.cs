@@ -20,9 +20,24 @@ namespace BumBum_Hrdy
     /// </summary>
     public partial class MainWindow : Window
     {
+        List<Bomb> bombs = new List<Bomb>();
+
         public MainWindow()
         {
             InitializeComponent();
+        }
+
+        private void Label_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            Random random = new Random();
+            var bomb = new Bomb(random.Next(5, 15));
+            bomb.Detonation += Bomb_Detonation;
+            bombs.Add(bomb);
+        }
+
+        private void Bomb_Detonation()
+        {
+            label.Content += "Bomba vybuchla";
         }
     }
 }
